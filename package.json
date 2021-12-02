@@ -1,0 +1,27 @@
+{
+  "name": "adventofcode2021",
+  "version": "1.0.0",
+  "description": "advent of code 2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flareofghast/AdventOfCode2021.git"
+  },
+  "author": "Peter Salzmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flareofghast/AdventOfCode2021/issues"
+  },
+  "homepage": "https://github.com/flareofghast/AdventOfCode2021#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
+  }
+}
