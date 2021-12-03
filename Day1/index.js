@@ -12,10 +12,6 @@ function compareVals(val1, val2) {
   return toReturn;
 }
 
-function splitData(input) {
-  return input.split('\n');
-}
-
 function tallyIncreases(input) {
   let NumIncreased = 0;
 
@@ -30,19 +26,16 @@ function tallyIncreases(input) {
 }
 
 function ProcessInputPart1(input) {
-  const data = splitData(input);
-
-  console.log(`Part 1: ${tallyIncreases(data)}`);
+  console.log(`Part 1: ${tallyIncreases(input)}`);
 }
 
 function ProcessInputPart2(input) {
-  const data = splitData(input);
   const slidingData = [];
 
-  for (let i = 0, j = 1, k = 2; k <= data.length; i++, j++, k++) {
-    const num1 = parseInt(data[i]);
-    const num2 = parseInt(data[j]);
-    const num3 = parseInt(data[k]);
+  for (let i = 0, j = 1, k = 2; k <= input.length; i++, j++, k++) {
+    const num1 = parseInt(input[i]);
+    const num2 = parseInt(input[j]);
+    const num3 = parseInt(input[k]);
 
     const sum = num1 + num2 + num3;
 
