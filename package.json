@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/flareofghast/AdventOfCode2021#readme",
   "dependencies": {
-    "axios": "^0.24.0"
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
