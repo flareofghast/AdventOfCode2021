@@ -60,8 +60,8 @@ module.exports = class BingoBoard {
 
     // check every row and column to see if there is a winner
     // as we're looking for false we need to check if undefined (meaning only true was found)
-    winningRow = winningRowArr.some((col, idx) => col.find((x) => x === false) === undefined);
-    winningCol = winningColArr.some((col, idx) => col.find((x) => x === false) === undefined);
+    winningRow = winningRowArr.some((col) => col.find((x) => x === false) === undefined);
+    winningCol = winningColArr.some((col) => col.find((x) => x === false) === undefined);
 
     // update board as winner if there is either a winning column or row
     this.winner = winningRow || winningCol;

@@ -3,7 +3,7 @@ const BingoBoard = require('./BingoBoard');
 
 const filePath = '../Day4/input';
 
-function ProcessPart1(data) {
+function GetBallsAndBoards(data) {
   let drawnBalls = [];
   const Boards = [];
   let boardData = [];
@@ -20,11 +20,17 @@ function ProcessPart1(data) {
       }
     }
   });
+  return { drawnBalls, Boards };
+}
+
+function ProcessPart1(data) {
+  const { drawnBalls, Boards } = GetBallsAndBoards(data);
 
   let winningBall;
   let winningBoard;
 
-  drawnBalls.some((val, idx) => Boards.some((board) => {
+  // for each ball drawn loop over the boards until a winner is found
+  drawnBalls.some((val) => Boards.some((board) => {
     board.registerBall(val);
     if (board.isWinner) {
       winningBall = val;
@@ -36,4 +42,37 @@ function ProcessPart1(data) {
   console.log(winningBall * winningBoard.sumOfUnmarked);
 }
 
+function ProcessPart2(data) {
+  const { drawnBalls, Boards } = GetBallsAndBoards(data);
+
+  let winningBall;
+  let winningBoard;
+
+  const totalBoards = Boards.length;
+  let winners = 0;
+
+  // loop over all balls until last winner has been found (assuming every board wins)
+  // for each ball drawn, check the boards, if is not already marked a winner
+  // register the ball on the board and re-check for win scenario.
+  // if it wins now, add to winner count and check if it is the final winner.
+  // if it is the final winner, return;
+  drawnBalls.some((val) => Boards.some((board) => {
+    if (!board.isWinner) {
+      board.registerBall(val);
+      if (board.isWinner) {
+        winners += 1;
+        if (winners === totalBoards) {
+          winningBall = val;
+          winningBoard = board;
+          return true;
+        }
+      }
+    }
+    return false;
+  }));
+
+  console.log(winningBall * winningBoard.sumOfUnmarked);
+}
+
 load(filePath, ProcessPart1);
+load(filePath, ProcessPart2);
