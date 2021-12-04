@@ -84,28 +84,12 @@ function getInverseBinary(intInput) {
   return leastCommon;
 }
 
-function padBinaryToSameLength(BinaryToMatch, BinaryToChange) {
-  let binToChange = BinaryToChange;
-  if (binToChange.length < BinaryToMatch.length) {
-    do {
-      const split = binToChange.split('');
-      split.unshift('0');
-      binToChange = split.join('');
-    } while (binToChange.length < BinaryToMatch.length);
-  }
-
-  return binToChange;
-}
-
 function processInputPart1(input) {
   const positional = separate(input);
   const gammaStr = getMostCommon(positional);
   const gammaPrs = parseInt(gammaStr, 2);
 
-  let epsilonStr = getInverseBinary(gammaPrs);
-
-  epsilonStr = padBinaryToSameLength(gammaStr, epsilonStr);
-
+  const epsilonStr = getInverseBinary(gammaPrs);
   const epsilonPrs = parseInt(epsilonStr, 2);
 
   console.log(`Part 1: ${gammaPrs * epsilonPrs}`);
