@@ -1,4 +1,4 @@
-const Element = require('./Element');
+const Element = require('../common/Element');
 
 module.exports = class BingoBoard {
   constructor(data) {
@@ -42,16 +42,19 @@ module.exports = class BingoBoard {
         // mark the number (only updates if is correct number and is not marked)
         // add the boolean to the collumn
         // update the winningRow (it will remain true if the row is a winner)
-        val.mark(num, this.updateUnmarked.bind(this));
+        if (val.value === num) {
+          val.mark(this.updateUnmarked.bind(this));
+        }
+
         try {
-          winningColArr[col].push(val.marked);
+          winningColArr[col].push(val.markedBool);
         } catch (err) {
           console.log(err);
         }
 
         // add this val to the winning row
         try {
-          winningRowArr[row].push(val.marked);
+          winningRowArr[row].push(val.markedBool);
         } catch (err) {
           console.log(err);
         }

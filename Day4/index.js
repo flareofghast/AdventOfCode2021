@@ -39,6 +39,7 @@ function ProcessPart1(data) {
     return board.isWinner;
   }));
 
+  // correct number = 54275
   console.log(winningBall * winningBoard.sumOfUnmarked);
 }
 
@@ -71,6 +72,7 @@ function ProcessPart2(data) {
     return false;
   }));
 
+  // correct number = 13158
   console.log(winningBall * winningBoard.sumOfUnmarked);
 }
 
