@@ -180,8 +180,9 @@ function ProcessPart2(data) {
 
   const dupeCount = findDupes(marked);
 
+  // 19663
   console.log(dupeCount);
 }
 
 load(filePath, ProcessPart1);
-load(filePath, ProcessPart2); // not 13354
+load(filePath, ProcessPart2);
