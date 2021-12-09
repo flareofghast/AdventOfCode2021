@@ -37,3 +37,13 @@ test('output correct amount of lanternfish at 80 days', () => {
   const input = '3,4,3,1,2';
   expect(day6.processPart1(input, 80)).toBe(5934);
 });
+
+test('output part2 correct amount of lanternfish at 80 days', () => {
+  const input = '3,4,3,1,2';
+  expect(day6.processPart2(input, 80)).toBe(5934);
+});
+
+test('output part2 correct amount of lanternfish at 256 days', () => {
+  const input = '3,4,3,1,2';
+  expect(day6.processPart2(input, 256)).toBe(26984457539);
+});
