@@ -1,4 +1,4 @@
-const day6 = require('../lanternfish');
+const day6 = require('../Day6/lanternfish');
 
 test('output correct amount of lanternfish after 1 day', () => {
   const input = '3,4,3,1,2';
