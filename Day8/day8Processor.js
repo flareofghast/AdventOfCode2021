@@ -35,7 +35,9 @@ function processPart1(input) {
       default: break;
     }
   }
-  console.log((counts.ones + counts.fours + counts.sevens + counts.eights));
+  const totalCount = (counts.ones + counts.fours + counts.sevens + counts.eights);
+  console.log(totalCount);
+  return totalCount;
 }
 
 module.exports = { processPart1 };
