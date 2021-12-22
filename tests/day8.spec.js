@@ -19,4 +19,21 @@ describe('day8Processor.js', () => {
   it('should return 61229 as the sum of all output values', () => {
     expect(day8.processPart2(input)).toBe(61229);
   });
+
+  it('should return 1', () => {
+    const one = ['edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | gc'];
+    expect(day8.processPart2(one)).toBe(1);
+  });
+  it('should return 4', () => {
+    const four = ['edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | gfhc'];
+    expect(day8.processPart2(four)).toBe(4);
+  });
+  it('should return 8', () => {
+    const eight = ['edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | gfhcabd'];
+    expect(day8.processPart2(eight)).toBe(8);
+  });
+  it('should return 7', () => {
+    const seven = ['edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | gfh'];
+    expect(day8.processPart2(seven)).toBe(7);
+  });
 });
