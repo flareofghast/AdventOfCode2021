@@ -36,4 +36,7 @@ describe('day8Processor.js', () => {
     const seven = ['edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | gfh'];
     expect(day8.processPart2(seven)).toBe(7);
   });
+  it('should return 5353', () => {
+    const input = ['acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf'];
+  });
 });

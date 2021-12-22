@@ -22,32 +22,35 @@ function determineNumber(examples, sequence) {
     // if the sequence contains all of 4 it's a 9
       if (sortedSequence === examples.nine
         || !examples.four.split('').some((elm) => !sortedSequence.includes(elm))) {
-        examples.nine === '' ? examples.nine = sortedSequence : null;
+        examples.nine === undefined ? examples.nine = sortedSequence : null;
         toReturn = 9;
-      }
-      // if the example doesn't contain all parts of 4 but it contains all the parts of 1 it's a 0
-      if (sortedSequence === examples.zero
-        || sortedSequence.includes(examples.one[0] && sortedSequence.includes(examples.one[1]))) {
-        examples.zero === '' ? examples.zero = sortedSequence : null;
+        // if the example doesn't contain all parts of 4 but it contains all the parts of 1 it's a 0
+      } else if (sortedSequence === examples.zero
+        || (sortedSequence.includes(examples.one.split('')[0]) && sortedSequence.includes(examples.one.split('')[1]))) {
+        examples.zero === undefined ? examples.zero = sortedSequence : null;
         toReturn = 0;
-      }
+      } else {
       // else it's a 6
-      examples.six === '' ? examples.six = sortedSequence : null;
-      toReturn = 6;
+        examples.six === undefined ? examples.six = sortedSequence : null;
+        toReturn = 6;
+      }
       break;
     case 5:
     // if the sequence contains all the right side (a one) it's a 3
       if (sortedSequence === examples.three
         || !examples.one.split('').some((elm) => !sortedSequence.includes(elm))) {
-        examples.three === '' ? examples.three = sortedSequence : null;
+        examples.three === undefined ? examples.three = sortedSequence : null;
         toReturn = 3;
+        break;
       }
 
       if (sortedSequence === examples.five) {
         toReturn = 5;
+        break;
       }
       if (sortedSequence === examples.two) {
         toReturn = 2;
+        break;
       }
 
       examples.four.split('').forEach((elm) => {
@@ -59,10 +62,12 @@ function determineNumber(examples, sequence) {
       if (countMissing === 1) {
         examples.five = sortedSequence;
         toReturn = 5;
+        break;
       }
       if (countMissing === 2) {
         examples.two = sortedSequence;
         toReturn = 2;
+        break;
       }
       break;
     case lengthOfFour: toReturn = 4;
@@ -77,6 +82,49 @@ function determineNumber(examples, sequence) {
       break;
   }
   return toReturn;
+}
+
+function determineInputValues(input) {
+  const examples = {};
+  // determine an example of unique identifiable segments
+  for (let i = 0, n = input.length; i < n; i++) {
+    if (!examples.one || !examples.four || !examples.seven || !examples.eight) {
+      const sortedSequence = input[i].split('').sort().join('');
+      switch (sortedSequence.length) {
+        case lengthOfOne:
+          if (!examples.one) {
+            examples.one = sortedSequence;
+          }
+          break;
+        case lengthOfFour:
+          if (!examples.four) {
+            examples.four = sortedSequence;
+          }
+          break;
+        case lengthOfSeven:
+          if (!examples.seven) {
+            examples.seven = sortedSequence;
+          }
+          break;
+        case lengthOfEight:
+          if (!examples.eight) {
+            examples.eight = sortedSequence;
+          }
+          break;
+
+        default: break;
+      }
+    } else { break; }
+  }
+
+  // need to determine the non-unique values
+  input.forEach((seq) => {
+    if (seq.length === 6 || seq.length === 5) {
+      determineNumber(examples, seq);
+    }
+  });
+
+  return examples;
 }
 
 function processPart1(input) {
@@ -108,52 +156,31 @@ function processPart1(input) {
 }
 
 function processPart2(input) {
-  const splitSorted = splitInput(input).sort((a, b) => a.length - b.length);
+  const lines = [];
+
+  input.forEach((element) => {
+    lines.push({ input: element.split('|')[0].split(' ').filter((elm) => elm !== ''), output: element.split('|')[1].split(' ').filter((elm) => elm !== '') });
+  });
+
   const decoded = [];
-  const examples = {
-    one: '', four: '', seven: '', eight: '',
-  };
+  // const examples = {
+  //   one: '', four: '', seven: '', eight: '',
+  // };
 
-  // determine an example of unique identifiable segments
-  for (let i = 0, n = splitSorted.length; i < n; i++) {
-    if (!examples.one || !examples.four || !examples.seven || !examples.eight) {
-      const sortedSequence = splitSorted[i].split('').sort().join('');
-      switch (sortedSequence.length) {
-        case lengthOfOne:
-          if (!examples.one) {
-            examples.one = sortedSequence;
-          }
-          break;
-        case lengthOfFour:
-          if (!examples.four) {
-            examples.four = sortedSequence;
-          }
-          break;
-        case lengthOfSeven:
-          if (!examples.seven) {
-            examples.seven = sortedSequence;
-          }
-          break;
-        case lengthOfEight:
-          if (!examples.eight) {
-            examples.eight = sortedSequence;
-          }
-          break;
-        default: break;
-      }
-    } else { break; }
-  }
-
-  splitSorted.forEach((line) => {
-    if (decoded.length > 0) {
-      if (decoded[decoded.length - 1].length < 4) {
-        decoded[decoded.length - 1] = decoded[decoded.length - 1] += determineNumber(examples, line).toString();
+  lines.forEach((line) => {
+    const examples = determineInputValues(line.input);
+    line.output.forEach((out) => {
+      if (decoded.length > 0) {
+        if (decoded[decoded.length - 1].length < 4) {
+          decoded[decoded.length - 1] = decoded[decoded.length - 1]
+        += determineNumber(examples, out).toString();
+        } else {
+          decoded.push(determineNumber(examples, out).toString());
+        }
       } else {
-        decoded.push(determineNumber(examples, line).toString());
+        decoded.push(determineNumber(examples, out).toString());
       }
-    } else {
-      decoded.push(determineNumber(examples, line).toString());
-    }
+    });
   });
 
   let count = 0;
