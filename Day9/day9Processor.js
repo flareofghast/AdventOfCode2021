@@ -5,25 +5,25 @@ function checkNeighbours(element, board) {
   try {
   // check above
     if (element.y !== 0) {
-      if (board[element.y - 1][element.x].value < element.value) {
+      if (board[element.y - 1][element.x].value <= element.value) {
         lowest = false;
       }
     }
     // check below
     if (element.y !== board.length - 1) {
-      if (board[element.y + 1][element.x].value < element.value) {
+      if (board[element.y + 1][element.x].value <= element.value) {
         lowest = false;
       }
     }
     // check right
     if (element.x !== board[element.y].length - 1) {
-      if (board[element.y][element.x + 1].value < element.value) {
+      if (board[element.y][element.x + 1].value <= element.value) {
         lowest = false;
       }
     }
     // check left
     if (element.x !== 0) {
-      if (board[element.y][element.x - 1].value < element.value) {
+      if (board[element.y][element.x - 1].value <= element.value) {
         lowest = false;
       }
     }
@@ -67,6 +67,7 @@ function processPart1(input) {
     riskCount += parseInt(elm.value, 10) + 1;
   });
 
+  console.log(riskCount);
   return { length: lowPoints.length, risk: riskCount };
 }
 
