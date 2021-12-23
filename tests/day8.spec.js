@@ -38,5 +38,6 @@ describe('day8Processor.js', () => {
   });
   it('should return 5353', () => {
     const input = ['acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf'];
+    expect(day8.processPart2(input)).toBe(5353);
   });
 });
